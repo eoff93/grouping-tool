@@ -15,9 +15,9 @@
   <link rel="stylesheet" href="app.css">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
-<body>
+<body ng-controller="MainController as main">
 
-  <main class="container" ng-controller="MainController as main">
+  <main class="container">
 
       <!-- Add website and add group buttons -->
       <section class="col-sm-3 col-sm-offset-1 controls">
@@ -39,16 +39,17 @@
           <span class="badge">
             {{ main.sites.length }}
           </span>
-
           </button>
+
           <div ng-repeat="group in main.groups">
             <button type="button" class="list-group-item">
               {{ group.name }}
               <span class="badge">
-                {{ group.length || 0 }} 
+                {{ group.length || 0 }}
               </span>
             </button>
           </div>
+
           <button type="button" class="list-group-item" data-toggle="modal" data-target="#website-modal">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add website
           </button>
@@ -74,9 +75,9 @@
             <th scope="col" colspan="2">Action</th>
           </tr>
           <tr ng-repeat="site in main.sites">
-            <td> {{ site.url }} </td>
-            <td> Edit </td>
-            <td> Delete </td>
+            <td> <a href="https://{{site.url}}/">{{ site.url }}</a></td>
+            <td> <a href="#" class="button">Edit</a> </td>
+            <td> <a href="#">Delete</a></td>
           </tr>
         </table>
         <button type="button" class="btn btn-default">Edit</button>
