@@ -35,8 +35,20 @@
       <section class="col-sm-4" id="groups">
         <div class="list-group">
           <button type="button" class="list-group-item active">
-          All websites <span class="badge">0</span>
+          All websites
+          <span class="badge">
+            {{ main.sites.length }}
+          </span>
+
           </button>
+          <div ng-repeat="group in main.groups">
+            <button type="button" class="list-group-item">
+              {{ group.name }}
+              <span class="badge">
+                {{ group.length || 0 }} 
+              </span>
+            </button>
+          </div>
           <button type="button" class="list-group-item" data-toggle="modal" data-target="#website-modal">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add website
           </button>
