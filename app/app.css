@@ -1,6 +1,11 @@
 body {
   padding-top: 50px; }
 
+/*
+  =====================================
+  List of groups
+  =====================================
+*/
 #groups button {
   border: 0;
   border-right: 1px solid lightgray; }
@@ -15,6 +20,11 @@ body {
 #groups .glyphicon-plus {
   color: #337ab7; }
 
+/*
+  =====================================
+  Modals
+  =====================================
+*/
 .modal h4 {
   font-weight: 700; }
 .modal label {
