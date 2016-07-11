@@ -15,4 +15,9 @@ body {
 #groups .glyphicon-plus {
   color: #337ab7; }
 
+.modal h4 {
+  font-weight: 700; }
+.modal label {
+  font-weight: 400; }
+
 /*# sourceMappingURL=app.css.map */
