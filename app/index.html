@@ -23,7 +23,7 @@
       <!-- Add website and add group buttons -->
       <section class="col-sm-3 col-sm-offset-1 controls">
         <div class="well">
-          <button type="button" class="btn btn-primary btn-block">
+          <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#website-modal">
             Add site
           </button>
           <button class="btn btn-primary btn-block">
@@ -38,7 +38,7 @@
           <button type="button" class="list-group-item active">
           All websites <span class="badge">0</span>
           </button>
-          <button type="button" class="list-group-item">
+          <button type="button" class="list-group-item" data-toggle="modal" data-target="#website-modal">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add website
           </button>
         </div>
@@ -48,7 +48,7 @@
       <section class="col-sm-4">
         <div class="well">
           You have no websites
-          <button class="btn btn-primary">
+          <button class="btn btn-primary" data-toggle="modal" data-target="#website-modal">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             Add one now!
           </button>
@@ -58,6 +58,24 @@
     </section> <!-- </row> -->
   </main>
 
+  <!-- Add website modal -->
+  <div class="modal fade" id="website-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
