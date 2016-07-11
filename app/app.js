@@ -3,24 +3,31 @@
 angular.module('groupApp',[])
   .controller('MainController', function() {
     var vm = this;
+    vm.addSite = function() {
+      vm.sites.push({
+        id: vm.sites.length + 1,
+        url: vm.url,
+        color: vm.color,
+        groups: []
+      });
+      vm.url = '';
+      vm.color = '';
+    }
 
     vm.sites = [];
-      /*
-      {
-        id: 1,
-        url: 'google.com',
-        color: 'green',
-        groups: []
-      },
-      */
-    vm.groups = [];
 
-      /*
+    vm.groups = [
       {
         id: 1,
         name: 'Search engines',
         color: "",
         sites: []
       },
-      */
+      {
+        id: 2,
+        name: 'Social sites',
+        color: "",
+        sites: []
+      }
+    ];
   });
