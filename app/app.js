@@ -40,5 +40,3 @@ angular.module('groupApp',[])
       }
     ];
   });
-
-;
