@@ -17,8 +17,7 @@
 </head>
 <body>
 
-  <main class="container">
-    <section class="row">
+  <main class="container" ng-controller="MainController as main">
 
       <!-- Add website and add group buttons -->
       <section class="col-sm-3 col-sm-offset-1 controls">
@@ -45,7 +44,7 @@
       </section>
 
       <!-- "You have no websites" well -->
-      <section class="col-sm-4">
+      <section class="col-sm-4" ng-hide="main.sites.length">
         <div class="well">
           You have no websites
           <button class="btn btn-primary" data-toggle="modal" data-target="#website-modal">
@@ -53,6 +52,21 @@
             Add one now!
           </button>
         </div>
+      </section>
+
+      <!-- Website table -->
+      <section class="col-sm-4" ng-show="main.sites.length">
+        <table class="table table-bordered">
+          <tr>
+            <th scope="col">URL</th>
+            <th scope="col" colspan="2">Action</th>
+          </tr>
+          <tr ng-repeat="site in main.sites">
+            <td> {{ site.url }} </td>
+            <td> Edit </td>
+            <td> Delete </td>
+          </tr>
+        </table>
       </section>
 
     </section> <!-- /.row -->

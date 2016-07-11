@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('groupApp',[])
-  .controller('ListController', function() {
+  .controller('MainController', function() {
     var vm = this;
 
     vm.sites = [
