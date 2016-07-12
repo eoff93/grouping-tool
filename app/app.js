@@ -16,6 +16,7 @@ angular.module('groupApp',[])
       vm.color = '';
     }
 
+    // dynamically removes a table row and site from vm.sites
     vm.removeSite = function(url) {
       var index = -1;
       var siteArr = eval(vm.sites);
@@ -25,9 +26,7 @@ angular.module('groupApp',[])
           break;
         }
       }
-      if (index === -1) {
-        alert('Something gone wrong');
-      }
+
       vm.sites.splice(index, 1);
     }
 
