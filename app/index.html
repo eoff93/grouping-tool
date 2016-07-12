@@ -34,15 +34,15 @@
       <!-- Website groups -->
       <section class="col-sm-4" id="groups">
         <div class="list-group">
-          <button type="button" class="list-group-item active">
+          <button type="button" class="list-group-item" ng-class="{ 'active':main.tab === 0}" ng-click="main.tab = 0">
           All websites
           <span class="badge">
             {{ main.sites.length }}
           </span>
           </button>
-
+          <!-- Show groups on the page and set tab value when clicked -->
           <div ng-repeat="group in main.groups">
-            <button type="button" class="list-group-item">
+            <button type="button" class="list-group-item" ng-class="{ active:main.tab === group.id}" ng-click="main.tab = group.id">
               {{ group.name }}
               <span class="badge">
                 {{ group.sites.length || 0 }}

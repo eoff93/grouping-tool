@@ -3,6 +3,7 @@
 angular.module('groupApp',['checklist-model'])
   .controller('MainController', function() {
     var vm = this;
+    vm.tab = 0;
     vm.sites = [];
     vm.groups = [];
     vm.selectedGroups = [];
