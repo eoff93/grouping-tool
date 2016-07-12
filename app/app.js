@@ -4,16 +4,18 @@ angular.module('groupApp',['checklist-model'])
   .controller('MainController', function() {
     var vm = this;
 
+    vm.selectedGroups = [];
     // adds a website from a modal and resets the forms
     vm.addSite = function() {
       vm.sites.push({
         id: vm.sites.length + 1,
         url: vm.url,
         color: vm.color,
-        groups: []
+        groups: vm.selectedGroups
       });
       vm.url = '';
       vm.color = '';
+      vm.selectedGroups = [];
     }
 
     // dynamically removes a table row and site from vm.sites

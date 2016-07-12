@@ -131,10 +131,8 @@
                     <label>
                       <input
                         type="checkbox"
-                        name="selectedGroups[]"
-                        value="{{ group.name }}"
-                        ng-checked="selection.indexOf(group.name) > -1"
-                        ng-click="toggleSelection(group.name)"
+                        checklist-model="main.selectedGroups"
+                        checklist-value="group.name"
                       >
                       {{ group.name }}
                     </label>
