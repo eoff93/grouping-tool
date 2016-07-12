@@ -77,7 +77,7 @@
           <tr ng-repeat="site in main.sites">
             <td> <a href="https://{{site.url}}/">{{ site.url }}</a></td>
             <td> <a href="#" class="button">Edit</a> </td>
-            <td> <a href="#">Delete</a></td>
+            <td> <a href="#" class="button" ng-click="main.removeSite(site.url)">Delete</a></td>
           </tr>
         </table>
         <button type="button" class="btn btn-default">Edit</button>

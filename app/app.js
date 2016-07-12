@@ -16,6 +16,21 @@ angular.module('groupApp',[])
       vm.color = '';
     }
 
+    vm.removeSite = function(url) {
+      var index = -1;
+      var siteArr = eval(vm.sites);
+      for (var i = 0; i < siteArr.length; i++) {
+        if (siteArr[i].url === url) {
+          index = i;
+          break;
+        }
+      }
+      if (index === -1) {
+        alert('Something gone wrong');
+      }
+      vm.sites.splice(index, 1);
+    }
+
     // adds a group from a modal and resets the forms
     vm.addGroup = function() {
       vm.groups.push({
