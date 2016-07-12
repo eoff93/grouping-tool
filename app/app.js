@@ -3,6 +3,8 @@
 angular.module('groupApp',[])
   .controller('MainController', function() {
     var vm = this;
+
+    // adds a website from a modal and resets the forms
     vm.addSite = function() {
       vm.sites.push({
         id: vm.sites.length + 1,
@@ -14,20 +16,17 @@ angular.module('groupApp',[])
       vm.color = '';
     }
 
-    vm.sites = [];
+    // adds a group from a modal and resets the forms
+    vm.addGroup = function() {
+      vm.groups.push({
+        id: vm.groups.length + 1,
+        name: vm.name,
+        color: vm.color
+      });
+      vm.name = '';
+      vm.color = '';
+    }
 
-    vm.groups = [
-      {
-        id: 1,
-        name: 'Search engines',
-        color: "",
-        sites: []
-      },
-      {
-        id: 2,
-        name: 'Social sites',
-        color: "",
-        sites: []
-      }
-    ];
+    vm.sites = [];
+    vm.groups = [];
   });
