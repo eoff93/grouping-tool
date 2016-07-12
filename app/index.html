@@ -67,8 +67,8 @@
         </div>
       </section>
 
-      <!-- Website table -->
-      <section class="col-sm-4" ng-show="main.sites.length">
+      <!-- All websites table -->
+      <section class="col-sm-4" ng-show="main.sites.length && main.isSelected(0)">
         <table class="table table-bordered">
           <tr>
             <th scope="col">URL</th>
@@ -76,6 +76,23 @@
           </tr>
           <tr ng-repeat="site in main.sites">
             <td> <a href="https://{{site.url}}/">{{ site.url }}</a></td>
+            <td> <a href="#" class="button">Edit</a> </td>
+            <td> <a href="#" class="button" ng-click="main.removeSite(site.url)">Delete</a></td>
+          </tr>
+        </table>
+        <button type="button" class="btn btn-default">Edit</button>
+        <button type="button" class="btn btn-danger">Delete</button>
+      </section>
+
+      <!-- Group table -->
+      <section class="col-sm-4" ng-hide="main.isSelected(0)">
+        <table class="table table-bordered">
+          <tr>
+            <th scope="col">URL</th>
+            <th scope="col" colspan="2">Action</th>
+          </tr>
+          <tr ng-repeat="site in main.groups[main.tab - 1].sites">
+            <td> <a href="https://{{site.url}}/">{{ site }}</a></td>
             <td> <a href="#" class="button">Edit</a> </td>
             <td> <a href="#" class="button" ng-click="main.removeSite(site.url)">Delete</a></td>
           </tr>
