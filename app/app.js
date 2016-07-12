@@ -3,8 +3,10 @@
 angular.module('groupApp',['checklist-model'])
   .controller('MainController', function() {
     var vm = this;
-
+    vm.sites = [];
+    vm.groups = [];
     vm.selectedGroups = [];
+
     // adds a website from a modal and resets the forms
     vm.addSite = function() {
       vm.sites.push({
@@ -13,9 +15,21 @@ angular.module('groupApp',['checklist-model'])
         color: vm.color,
         groups: vm.selectedGroups
       });
+
+      // add sites to picked groups
+      for (var i = 0; i < vm.selectedGroups.length; i++) {
+        for (var j = 0; j < vm.groups.length; j++) {
+          if (vm.selectedGroups[i] === vm.groups[j].name) {
+            vm.groups[j].sites.push(vm.url);
+          }
+        }
+      }
+
+      // reset forms and selected groups
       vm.url = '';
       vm.color = '';
       vm.selectedGroups = [];
+
     }
 
     // dynamically removes a table row and site from vm.sites
@@ -37,12 +51,10 @@ angular.module('groupApp',['checklist-model'])
       vm.groups.push({
         id: vm.groups.length + 1,
         name: vm.name,
-        color: vm.color
+        color: vm.color,
+        sites: []
       });
       vm.name = '';
       vm.color = '';
     }
-
-    vm.sites = [];
-    vm.groups = [];
   });
