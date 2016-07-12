@@ -8,6 +8,16 @@ angular.module('groupApp',['checklist-model'])
     vm.groups = [];
     vm.selectedGroups = [];
 
+    // changes vm.tab to the id of a clicked group
+    vm.selectTab = function(setTab) {
+      vm.tab = setTab;
+    };
+
+    // checks which tab is selected and then use it to set a class
+    vm.isSelected = function(checkTab) {
+      return vm.tab === checkTab;
+    };
+
     // adds a website from a modal and resets the forms
     vm.addSite = function() {
       vm.sites.push({
@@ -30,7 +40,6 @@ angular.module('groupApp',['checklist-model'])
       vm.url = '';
       vm.color = '';
       vm.selectedGroups = [];
-
     }
 
     // dynamically removes a table row and site from vm.sites
