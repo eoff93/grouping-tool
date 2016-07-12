@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('groupApp',[])
+angular.module('groupApp',['checklist-model'])
   .controller('MainController', function() {
     var vm = this;
 
