@@ -56,6 +56,11 @@ angular.module('groupApp',['checklist-model'])
       vm.sites.splice(index, 1);
     }
 
+    vm.removeFromGroup = function(site) {
+      var index = vm.groups[vm.tab - 1].sites.indexOf(site);
+      vm.groups[vm.tab - 1].sites.splice(index, 1);
+    }
+
     // adds a group from a modal and resets the forms
     vm.addGroup = function() {
       vm.groups.push({
