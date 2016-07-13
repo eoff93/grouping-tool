@@ -52,7 +52,7 @@ angular.module('groupApp',['checklist-model'])
           break;
         }
       }
-
+      vm.removeFromGroup(url);
       vm.sites.splice(index, 1);
     }
 
@@ -61,7 +61,18 @@ angular.module('groupApp',['checklist-model'])
       return (vm.groups[vm.tab - 1].sites.length > 0) ? true:false;
     }
 
+    // finds all occurences of a website in groups and deletes it
     vm.removeFromGroup = function(site) {
+      for (var i = 0; i < vm.groups.length; i++) {
+        for (var j = 0; j < vm.groups[i].sites.length; j++) {
+          if (vm.groups[i].sites[j] === site) {
+            vm.groups[i].sites.splice(j, 1);
+          }
+        }
+      }
+    }
+
+    vm.removeFromGroupOnly = function(site) {
       var index = vm.groups[vm.tab - 1].sites.indexOf(site);
       vm.groups[vm.tab - 1].sites.splice(index, 1);
     }

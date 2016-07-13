@@ -92,7 +92,7 @@
           <tr ng-repeat="site in main.groups[main.tab - 1].sites">
             <td> <a href="https://{{site}}/">{{ site }}</a></td>
             <td> <a href="#" class="button">Edit</a> </td>
-            <td> <a href="#" class="button" ng-click="main.removeFromGroup(site)">Delete</a></td>
+            <td> <a href="#" class="button" ng-click="main.removeFromGroupOnly(site)">Delete</a></td>
           </tr>
         </table>
         <button type="button" class="btn btn-default">Edit Group</button>
