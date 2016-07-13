@@ -96,7 +96,7 @@
           </tr>
         </table>
         <button type="button" class="btn btn-default">Edit Group</button>
-        <button type="button" class="btn btn-danger">Delete Group</button>
+        <button type="button" class="btn btn-danger" ng-click="main.removeGroup(main.tab - 1, main.groups[main.tab-1].name)">Delete Group</button>
       </section>
 
     </section> <!-- /.row -->
@@ -210,6 +210,15 @@
       </div>
     </div>
   </div>
+
+  <pre>{{main.sites}}</pre>
+  <pre>{{main.groups}}</pre>
+  {{main.tab}}
+  <br>
+  {{main.groups[main.tab - 1]}}
+  <br>
+  <p>name goes here</p>
+  {{main.groups[main.tab - 1].name}}
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->

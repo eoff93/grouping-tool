@@ -58,7 +58,24 @@ angular.module('groupApp',['checklist-model'])
 
     // check if a currently selected group has websites
     vm.hasSites = function() {
-      return (vm.groups[vm.tab - 1].sites.length > 0) ? true:false;
+      if (vm.groups.length) {
+        return (vm.groups[vm.tab - 1].sites.length > 0) ? true:false;
+      }
+    }
+
+    vm.removeGroupFromSites = function(group) {
+      for (var i = 0; i < vm.sites.length; i++) {
+        for (var j = 0; j < vm.sites[i].groups.length; j++) {
+          if (vm.sites[i].groups[j] === group) {
+            vm.sites[i].groups.splice(j, 1);
+          }
+        }
+      }
+    }
+
+    vm.removeGroup = function(activeGroup, group) {
+      vm.removeGroupFromSites(group);
+      vm.groups.splice(activeGroup, 1);
     }
 
     // finds all occurences of a website in groups and deletes it
@@ -72,6 +89,7 @@ angular.module('groupApp',['checklist-model'])
       }
     }
 
+    // only removes a website from its group, not from all websites
     vm.removeFromGroupOnly = function(site) {
       var index = vm.groups[vm.tab - 1].sites.indexOf(site);
       vm.groups[vm.tab - 1].sites.splice(index, 1);
