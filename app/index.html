@@ -83,7 +83,7 @@
       </section>
 
       <!-- Group table -->
-      <section class="col-sm-4" ng-hide="main.isSelected(0) || !main.groups[main.tab - 1].sites.length">
+      <section class="col-sm-4" ng-hide="main.isSelected(0) || !main.hasSites()">
         <table class="table table-bordered">
           <tr>
             <th scope="col">URL</th>

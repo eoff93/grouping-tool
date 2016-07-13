@@ -56,6 +56,11 @@ angular.module('groupApp',['checklist-model'])
       vm.sites.splice(index, 1);
     }
 
+    // check if a currently selected group has websites
+    vm.hasSites = function() {
+      return (vm.groups[vm.tab - 1].sites.length > 0) ? true:false;
+    }
+
     vm.removeFromGroup = function(site) {
       var index = vm.groups[vm.tab - 1].sites.indexOf(site);
       vm.groups[vm.tab - 1].sites.splice(index, 1);
