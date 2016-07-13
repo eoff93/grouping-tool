@@ -73,9 +73,17 @@ angular.module('groupApp',['checklist-model'])
       }
     }
 
+    vm.updateGroupIds = function() {
+      for (var i = 0; i < vm.groups.length; i++) {
+        vm.groups[i].id = i + 1;
+      }
+    }
+
     vm.removeGroup = function(activeGroup, group) {
       vm.removeGroupFromSites(group);
       vm.groups.splice(activeGroup, 1);
+      vm.updateGroupIds();
+      vm.selectTab(vm.tab - 1);
     }
 
     // finds all occurences of a website in groups and deletes it
