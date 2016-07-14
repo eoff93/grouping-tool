@@ -49,6 +49,11 @@ angular.module('groupApp',['checklist-model'])
       vm.siteToEdit = vm.sites[index];
     }
 
+    //
+    vm.setGroupToEdit = function(index) {
+      vm.groupToEdit = vm.groups[index - 1];
+    }
+
     // dynamically removes a table row and site from vm.sites
     vm.removeSite = function(url) {
       var index = -1;
