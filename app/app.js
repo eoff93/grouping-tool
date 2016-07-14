@@ -1,13 +1,17 @@
 'use strict';
 
 angular.module('groupApp',['checklist-model'])
-  .controller('MainController', function() {
+  .controller('AppController', function() {
     var vm = this;
+    vm.data = {
+      sites: [],
+      groups: []
+    }
     vm.siteToEdit;
     vm.groupToEdit;
     vm.tab = 0;
-    vm.sites = [];
-    vm.groups = [];
+    vm.sites = vm.data.sites;
+    vm.groups = vm.data.groups;
     vm.selectedGroups = [];
 
     // changes vm.tab to the id of a clicked group
