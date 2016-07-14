@@ -76,7 +76,7 @@
           </tr>
           <tr ng-repeat="site in main.sites">
             <td> <a href="https://{{site.url}}/">{{ site.url }}</a></td>
-            <td> <a href="#" class="button">Edit</a> </td>
+            <td> <a href="#" class="button" data-toggle="modal" data-target="#edit-website-modal" ng-click="main.setSiteToEdit($index)">Edit</a> </td>
             <td> <a href="#" class="button" ng-click="main.removeSite(site.url)">Delete</a></td>
           </tr>
         </table>
@@ -159,6 +159,70 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit website modal -->
+  <div class="modal fade" id="edit-website-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Edit site</h4>
+        </div>
+        <div class="modal-body">
+
+          <!-- Website URL form -->
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label for="website-url" class="col-sm-2 control-label">Site URL</label>
+              <div class="col-sm-10">
+                <input ng-model="main.siteToEdit.url" type="text" class="form-control" id="website-url" required>
+              </div>
+            </div>
+
+            <!-- Website color form -->
+            <div class="form-group">
+              <label for="website-color" class="col-sm-2 control-label">Site color</label>
+              <div class="col-sm-10">
+                <select name="selectColor" id="selectColor" class="form-control" ng-model="main.siteToEdit.color">
+                  <option value="">- None -</option>
+                  <option value="red">Red</option>
+                  <option value="green">Green</option>
+                  <option value="blue">Blue</option>
+                  <option value="yellow">Yellow</option>
+                  <option value="orange">Orange</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Website group form -->
+            <div class="form-group" ng-show="main.groups.length">
+              <label for="pick-group" class="col-sm-2 control-label">Groups</label>
+              <div class="col-sm-10" id="pick-group">
+
+                <div ng-repeat="group in main.groups">
+                  <div class="checkbox">
+                    <label>
+                      <input
+                        type="checkbox"
+                        checklist-model="main.siteToEdit.groups"
+                        checklist-value="group.name"
+                      >
+                      {{ group.name }}
+                    </label>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
           </form>
         </div>
