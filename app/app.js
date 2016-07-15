@@ -35,12 +35,19 @@ angular.module('groupApp',['checklist-model'])
       vm.groupToEdit = vm.groups[index];
     }
 
+    vm.removeGroup = function(activeGroup, group) {
+      vm.removeGroupFromSites(group);
+      vm.groups.splice(activeGroup, 1);
+      vm.updateGroupIds();
+    }
+
     // cycles through sites and removes the parameter group
     vm.removeGroupFromSites = function(group) {
-      for (var i = 0; i < vm.sites.length; i++) {
-        for (var j = 0; j < vm.sites[i].groups.length; j++) {
-          if (vm.sites[i].groups[j] === group) {
-            vm.sites[i].groups.splice(j, 1);
+      var sites = getData.sites;
+      for (var i = 0; i < sites.length; i++) {
+        for (var j = 0; j < sites[i].groups.length; j++) {
+          if (sites[i].groups[j] === group) {
+            sites[i].groups.splice(j, 1);
           }
         }
       }
@@ -55,16 +62,12 @@ angular.module('groupApp',['checklist-model'])
 
     // check if a currently selected group has websites
     vm.hasSites = function(index) {
-      if (vm.groups.length) {
-        return (vm.groups[index].sites.length > 0) ? true:false;
-      }
-    }
+      var numberOfGroups = vm.groups.length;
+      var groupExists = index <= vm.groups.length - 1;
 
-    vm.removeGroup = function(activeGroup, group) {
-      vm.removeGroupFromSites(group);
-      vm.groups.splice(activeGroup, 1);
-      vm.updateGroupIds();
-      vm.selectTab(vm.tab - 1);
+      if (numberOfGroups && groupExists) {
+          return (vm.groups[index].sites.length > 0) ? true:false;
+      }
     }
 
     // only removes a website from its group, not from all websites

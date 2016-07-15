@@ -97,7 +97,7 @@
             </tr>
           </table>
           <button type="button" class="btn btn-default" data-toggle="modal" data-target="#edit-group-modal" ng-click="group.setGroupToEdit(tab.activeGroup)">Edit Group</button>
-          <button type="button" class="btn btn-danger" ng-click="group.removeGroup(tab.activeGroup, group.groups[tab.activeGroup].name)">Delete Group</button>
+          <button type="button" class="btn btn-danger" ng-click="group.removeGroup(tab.activeGroup, group.groups[tab.activeGroup].name, tab.selectTab(tab.tab - 1)); tab.selectTab(activeGroup)">Delete Group</button>
         </section>
       </div>
 
@@ -321,6 +321,8 @@
       </div>
     </div>
   </div>
+
+  {{app.data}}
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
