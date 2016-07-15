@@ -12,6 +12,10 @@ angular.module('groupApp',['checklist-model'])
     vm.tab = 0;
     vm.activeGroup = vm.tab - 1;
 
+    vm.setActiveGroup = function() {
+      vm.activeGroup = vm.tab - 1;
+    }
+
     // changes vm.tab to the id of a clicked group
     vm.selectTab = function(setTab) {
       vm.tab = setTab;
@@ -21,26 +25,14 @@ angular.module('groupApp',['checklist-model'])
     vm.isSelected = function(checkTab) {
       return vm.tab === checkTab;
     };
-
-
   })
+
   .controller('GroupController', function(getData) {
     var vm = this;
     vm.groups = getData.groups;
 
     vm.setGroupToEdit = function(index) {
-      vm.groupToEdit = vm.groups[index - 1];
-    }
-
-    // cycles through sites and removes the parameter group
-    vm.removeGroupFromSites = function(group) {
-      for (var i = 0; i < vm.sites.length; i++) {
-        for (var j = 0; j < vm.sites[i].groups.length; j++) {
-          if (vm.sites[i].groups[j] === group) {
-            vm.sites[i].groups.splice(j, 1);
-          }
-        }
-      }
+      vm.groupToEdit = vm.groups[index];
     }
 
     // cycles through sites and removes the parameter group
@@ -58,6 +50,13 @@ angular.module('groupApp',['checklist-model'])
     vm.updateGroupIds = function() {
       for (var i = 0; i < vm.groups.length; i++) {
         vm.groups[i].id = i + 1;
+      }
+    }
+
+    // check if a currently selected group has websites
+    vm.hasSites = function(index) {
+      if (vm.groups.length) {
+        return (vm.groups[index].sites.length > 0) ? true:false;
       }
     }
 
@@ -142,13 +141,6 @@ angular.module('groupApp',['checklist-model'])
       }
       vm.removeFromGroup(url);
       vm.sites.splice(index, 1);
-    }
-
-    // check if a currently selected group has websites
-    vm.hasSites = function(index) {
-      if (vm.groups.length) {
-        return (vm.groups[index - 1].sites.length > 0) ? true:false;
-      }
     }
 
     // cycles through sites and removes the parameter group

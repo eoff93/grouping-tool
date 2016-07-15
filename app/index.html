@@ -35,7 +35,7 @@
         <!-- Website groups -->
         <section class="col-sm-4" id="groups" ng-controller="GroupController as group">
           <div class="list-group">
-            <button type="button" class="list-group-item" ng-class="{ 'active':tab.isSelected(0)}" ng-click="tab.selectTab(0)">
+            <button type="button" class="list-group-item" ng-class="{ 'active':tab.isSelected(0)}" ng-click="tab.selectTab(0); tab.setActiveGroup()">
             All websites
             <span class="badge">
               {{ app.sites.length }}
@@ -43,7 +43,7 @@
             </button>
             <!-- Show groups on the page and set tab value when clicked -->
             <div ng-repeat="group in group.groups">
-              <button type="button" class="list-group-item" ng-class="{ active:tab.isSelected(group.id)}" ng-click="tab.selectTab(group.id)">
+              <button type="button" class="list-group-item" ng-class="{ active:tab.isSelected(group.id)}" ng-click="tab.selectTab(group.id); tab.setActiveGroup()">
                 {{ group.name }}
                 <span class="badge">
                   {{ group.sites.length || 0 }}
@@ -84,20 +84,20 @@
         </section>
 
         <!-- Group table -->
-        <section class="col-sm-4" ng-hide="tab.isSelected(0) || !app.hasSites(tab.tab)" ng-controller="GroupController as group">
+        <section class="col-sm-4" ng-hide="tab.isSelected(0) || !group.hasSites(tab.activeGroup)" ng-controller="GroupController as group">
           <table class="table table-bordered">
             <tr>
               <th scope="col">URL</th>
               <th scope="col" colspan="2">Action</th>
             </tr>
-            <tr ng-repeat="site in group.groups[tab.tab - 1].sites">
+            <tr ng-repeat="site in group.groups[tab.activeGroup].sites">
               <td> <a href="https://{{site}}/">{{ site }}</a></td>
               <td> <a href="#" class="button">Edit</a> </td>
               <td> <a href="#" class="button" ng-click="group.removeFromGroupOnly(site)">Delete</a></td>
             </tr>
           </table>
-          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#edit-group-modal" ng-click="group.setGroupToEdit(tab.tab)">Edit Group</button>
-          <button type="button" class="btn btn-danger" ng-click="group.removeGroup(tab.tab - 1, group.groups[tab.tab-1].name)">Delete Group</button>
+          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#edit-group-modal" ng-click="group.setGroupToEdit(tab.activeGroup)">Edit Group</button>
+          <button type="button" class="btn btn-danger" ng-click="group.removeGroup(tab.activeGroup, group.groups[tab.activeGroup].name)">Delete Group</button>
         </section>
       </div>
 
@@ -321,8 +321,6 @@
       </div>
     </div>
   </div>
-
-  {{app.data}}
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
