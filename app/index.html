@@ -93,11 +93,11 @@
             <tr ng-repeat="site in group.groups[tab.activeGroup].sites">
               <td> <a href="https://{{site}}/">{{ site }}</a></td>
               <td> <a href="#" class="button">Edit</a> </td>
-              <td> <a href="#" class="button" ng-click="group.removeFromGroupOnly(site)">Delete</a></td>
+              <td> <a href="#" class="button" ng-click="group.removeFromGroupOnly( tab.activeGroup, $index)">Delete</a></td>
             </tr>
           </table>
           <button type="button" class="btn btn-default" data-toggle="modal" data-target="#edit-group-modal" ng-click="group.setGroupToEdit(tab.activeGroup)">Edit Group</button>
-          <button type="button" class="btn btn-danger" ng-click="group.removeGroup(tab.activeGroup, group.groups[tab.activeGroup].name, tab.selectTab(tab.tab - 1)); tab.selectTab(activeGroup)">Delete Group</button>
+          <button type="button" class="btn btn-danger" ng-click="group.removeGroup(tab.activeGroup, group.groups[tab.activeGroup].name)">Delete Group</button>
         </section>
       </div>
 

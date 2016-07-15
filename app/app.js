@@ -71,9 +71,9 @@ angular.module('groupApp',['checklist-model'])
     }
 
     // only removes a website from its group, not from all websites
-    vm.removeFromGroupOnly = function(site) {
-      var index = vm.groups[vm.tab - 1].sites.indexOf(site);
-      vm.groups[vm.tab - 1].sites.splice(index, 1);
+    vm.removeFromGroupOnly = function(activeGroup, index) {
+
+      vm.groups[activeGroup].sites.splice(index, 1);
     }
 
     // adds a group from a modal and resets the forms
@@ -95,7 +95,6 @@ angular.module('groupApp',['checklist-model'])
     vm.groups = vm.data.groups;
     vm.selectedGroups = [];
     vm.siteToEdit;
-    vm.groupToEdit;
     vm.tab = 0;
 
     // adds a website from a modal and resets the forms
@@ -127,11 +126,6 @@ angular.module('groupApp',['checklist-model'])
       vm.siteToEdit = vm.sites[index];
     }
 
-    //
-    vm.setGroupToEdit = function(index) {
-      vm.groupToEdit = vm.groups[index - 1];
-    }
-
     // dynamically removes a table row and site from vm.sites
     vm.removeSite = function(url) {
       var index = -1;
@@ -146,31 +140,6 @@ angular.module('groupApp',['checklist-model'])
       vm.sites.splice(index, 1);
     }
 
-    // cycles through sites and removes the parameter group
-    vm.removeGroupFromSites = function(group) {
-      for (var i = 0; i < vm.sites.length; i++) {
-        for (var j = 0; j < vm.sites[i].groups.length; j++) {
-          if (vm.sites[i].groups[j] === group) {
-            vm.sites[i].groups.splice(j, 1);
-          }
-        }
-      }
-    }
-
-    // updates group ids starting from 1
-    vm.updateGroupIds = function() {
-      for (var i = 0; i < vm.groups.length; i++) {
-        vm.groups[i].id = i + 1;
-      }
-    }
-
-    vm.removeGroup = function(activeGroup, group) {
-      vm.removeGroupFromSites(group);
-      vm.groups.splice(activeGroup, 1);
-      vm.updateGroupIds();
-      vm.selectTab(vm.tab - 1);
-    }
-
     // finds all occurences of a website in groups and deletes it
     vm.removeFromGroup = function(site) {
       for (var i = 0; i < vm.groups.length; i++) {
@@ -180,12 +149,6 @@ angular.module('groupApp',['checklist-model'])
           }
         }
       }
-    }
-
-    // only removes a website from its group, not from all websites
-    vm.removeFromGroupOnly = function(site) {
-      var index = vm.groups[vm.tab - 1].sites.indexOf(site);
-      vm.groups[vm.tab - 1].sites.splice(index, 1);
     }
 
     // adds a group from a modal and resets the forms
