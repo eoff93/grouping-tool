@@ -29,10 +29,24 @@ angular.module('groupApp',['checklist-model'])
 
   .controller('GroupController', function(getData) {
     var vm = this;
-    vm.groups = getData.groups;
+    vm.data = getData;
+    vm.groups = vm.data.groups;
+    vm.groupToEdit;
+
+    // adds a group from a modal and resets the forms
+    vm.addGroup = function() {
+      vm.groups.push({
+        id: vm.groups.length + 1,
+        name: vm.name,
+        color: vm.color,
+        sites: []
+      });
+      vm.name = '';
+      vm.color = '';
+    }
 
     vm.setGroupToEdit = function(index) {
-      vm.groupToEdit = vm.groups[index];
+      vm.groupToEdit = vm.data.groups[index];
     }
 
     vm.removeGroup = function(activeGroup, group) {
@@ -75,17 +89,6 @@ angular.module('groupApp',['checklist-model'])
       vm.groups[activeGroup].sites.splice(index, 1);
     }
 
-    // adds a group from a modal and resets the forms
-    vm.addGroup = function() {
-      vm.groups.push({
-        id: vm.groups.length + 1,
-        name: vm.name,
-        color: vm.color,
-        sites: []
-      });
-      vm.name = '';
-      vm.color = '';
-    }
   })
   .controller('AppController', function(getData) {
     var vm = this;
@@ -126,7 +129,6 @@ angular.module('groupApp',['checklist-model'])
       }
     }
 
-    //
     vm.setSiteToEdit = function(index) {
       vm.siteToEdit = vm.sites[index];
     }
