@@ -72,7 +72,6 @@ angular.module('groupApp',['checklist-model'])
 
     // only removes a website from its group, not from all websites
     vm.removeFromGroupOnly = function(activeGroup, index) {
-
       vm.groups[activeGroup].sites.splice(index, 1);
     }
 
@@ -121,6 +120,12 @@ angular.module('groupApp',['checklist-model'])
       vm.selectedGroups = [];
     }
 
+    vm.updateSiteIds = function() {
+      for (var i = 0; i < vm.sites.length; i++) {
+        vm.sites[i].id = i + 1;
+      }
+    }
+
     //
     vm.setSiteToEdit = function(index) {
       vm.siteToEdit = vm.sites[index];
@@ -138,6 +143,7 @@ angular.module('groupApp',['checklist-model'])
       }
       vm.removeFromGroup(url);
       vm.sites.splice(index, 1);
+      vm.updateSiteIds();
     }
 
     // finds all occurences of a website in groups and deletes it
