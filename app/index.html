@@ -31,73 +31,75 @@
         </div>
       </section>
 
-      <!-- Website groups -->
-      <section class="col-sm-4" id="groups">
-        <div class="list-group">
-          <button type="button" class="list-group-item" ng-class="{ 'active':app.isSelected(0)}" ng-click="app.selectTab(0)">
-          All websites
-          <span class="badge">
-            {{ app.sites.length }}
-          </span>
-          </button>
-          <!-- Show groups on the page and set tab value when clicked -->
-          <div ng-repeat="group in app.groups">
-            <button type="button" class="list-group-item" ng-class="{ active:app.isSelected(group.id)}" ng-click="app.selectTab(group.id)">
-              {{ group.name }}
-              <span class="badge">
-                {{ group.sites.length || 0 }}
-              </span>
+      <div ng-controller="TabController as tab">
+        <!-- Website groups -->
+        <section class="col-sm-4" id="groups">
+          <div class="list-group">
+            <button type="button" class="list-group-item" ng-class="{ 'active':tab.isSelected(0)}" ng-click="tab.selectTab(0)">
+            All websites
+            <span class="badge">
+              {{ app.sites.length }}
+            </span>
+            </button>
+            <!-- Show groups on the page and set tab value when clicked -->
+            <div ng-repeat="group in app.groups">
+              <button type="button" class="list-group-item" ng-class="{ active:tab.isSelected(group.id)}" ng-click="tab.selectTab(group.id)">
+                {{ group.name }}
+                <span class="badge">
+                  {{ group.sites.length || 0 }}
+                </span>
+              </button>
+            </div>
+
+            <button type="button" class="list-group-item" data-toggle="modal" data-target="#group-modal">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add group
             </button>
           </div>
+        </section>
 
-          <button type="button" class="list-group-item" data-toggle="modal" data-target="#group-modal">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add group
-          </button>
-        </div>
-      </section>
+        <!-- "You have no websites" well -->
+        <section class="col-sm-4" ng-hide="app.sites.length">
+          <div class="well">
+            You have no websites
+            <button class="btn btn-primary" data-toggle="modal" data-target="#website-modal">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+              Add one now!
+            </button>
+          </div>
+        </section>
 
-      <!-- "You have no websites" well -->
-      <section class="col-sm-4" ng-hide="app.sites.length">
-        <div class="well">
-          You have no websites
-          <button class="btn btn-primary" data-toggle="modal" data-target="#website-modal">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-            Add one now!
-          </button>
-        </div>
-      </section>
+        <!-- All websites table -->
+        <section class="col-sm-4" ng-show="app.sites.length && tab.isSelected(0)">
+          <table class="table table-bordered">
+            <tr>
+              <th scope="col">URL</th>
+              <th scope="col" colspan="2">Action</th>
+            </tr>
+            <tr ng-repeat="site in app.sites">
+              <td> <a href="https://{{site.url}}/">{{ site.url }}</a></td>
+              <td> <a href="#" class="button" data-toggle="modal" data-target="#edit-website-modal" ng-click="app.setSiteToEdit($index)">Edit</a> </td>
+              <td> <a href="#" class="button" ng-click="app.removeSite(site.url)">Delete</a></td>
+            </tr>
+          </table>
+        </section>
 
-      <!-- All websites table -->
-      <section class="col-sm-4" ng-show="app.sites.length && app.isSelected(0)">
-        <table class="table table-bordered">
-          <tr>
-            <th scope="col">URL</th>
-            <th scope="col" colspan="2">Action</th>
-          </tr>
-          <tr ng-repeat="site in app.sites">
-            <td> <a href="https://{{site.url}}/">{{ site.url }}</a></td>
-            <td> <a href="#" class="button" data-toggle="modal" data-target="#edit-website-modal" ng-click="app.setSiteToEdit($index)">Edit</a> </td>
-            <td> <a href="#" class="button" ng-click="app.removeSite(site.url)">Delete</a></td>
-          </tr>
-        </table>
-      </section>
-
-      <!-- Group table -->
-      <section class="col-sm-4" ng-hide="app.isSelected(0) || !app.hasSites()">
-        <table class="table table-bordered">
-          <tr>
-            <th scope="col">URL</th>
-            <th scope="col" colspan="2">Action</th>
-          </tr>
-          <tr ng-repeat="site in app.groups[app.tab - 1].sites">
-            <td> <a href="https://{{site}}/">{{ site }}</a></td>
-            <td> <a href="#" class="button">Edit</a> </td>
-            <td> <a href="#" class="button" ng-click="app.removeFromGroupOnly(site)">Delete</a></td>
-          </tr>
-        </table>
-        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#edit-group-modal" ng-click="app.setGroupToEdit(app.tab)">Edit Group</button>
-        <button type="button" class="btn btn-danger" ng-click="app.removeGroup(app.tab - 1, app.groups[app.tab-1].name)">Delete Group</button>
-      </section>
+        <!-- Group table -->
+        <section class="col-sm-4" ng-hide="tab.isSelected(0) || !app.hasSites(tab.tab)">
+          <table class="table table-bordered">
+            <tr>
+              <th scope="col">URL</th>
+              <th scope="col" colspan="2">Action</th>
+            </tr>
+            <tr ng-repeat="site in app.groups[tab.tab - 1].sites">
+              <td> <a href="https://{{site}}/">{{ site }}</a></td>
+              <td> <a href="#" class="button">Edit</a> </td>
+              <td> <a href="#" class="button" ng-click="app.removeFromGroupOnly(site)">Delete</a></td>
+            </tr>
+          </table>
+          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#edit-group-modal" ng-click="app.setGroupToEdit(tab.tab)">Edit Group</button>
+          <button type="button" class="btn btn-danger" ng-click="app.removeGroup(tab.tab - 1, app.groups[tab.tab-1].name)">Delete Group</button>
+        </section>
+      </div>
 
     </section> <!-- /.row -->
   </main> <!-- /.container -->

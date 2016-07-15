@@ -1,15 +1,33 @@
 'use strict';
 
 angular.module('groupApp',['checklist-model'])
-  .factory('data', function() {
+  .factory('getData', function() {
     var data = {sites: [], groups: []};
 
     return data;
   })
 
-  .controller('AppController', function(data) {
+  .controller('TabController', function(getData) {
     var vm = this;
-    vm.data = data;
+    vm.tab = 0;
+    vm.activeGroup = vm.tab - 1;
+
+    // changes vm.tab to the id of a clicked group
+    vm.selectTab = function(setTab) {
+      vm.tab = setTab;
+    };
+
+    // checks which tab is selected and then use it to set a class
+    vm.isSelected = function(checkTab) {
+      return vm.tab === checkTab;
+    };
+
+
+  })
+
+  .controller('AppController', function(getData) {
+    var vm = this;
+    vm.data = getData;
     vm.sites = vm.data.sites;
     vm.groups = vm.data.groups;
     vm.selectedGroups = [];
@@ -76,9 +94,9 @@ angular.module('groupApp',['checklist-model'])
     }
 
     // check if a currently selected group has websites
-    vm.hasSites = function() {
+    vm.hasSites = function(index) {
       if (vm.groups.length) {
-        return (vm.groups[vm.tab - 1].sites.length > 0) ? true:false;
+        return (vm.groups[index - 1].sites.length > 0) ? true:false;
       }
     }
 
